@@ -3,7 +3,7 @@
 
 Wifi monitoring through discord
 
-This is a valuable bot to host especially if you've got a raspberry pi, whether you're trying to monitor your wifi for hackers or a tech savvy delinquent teen (like me) trying to check which family members are at home while you smell like cigarettes, this bot has you covered.
+This is a valuable bot to host especially if you've got a raspberry pi, whether you're trying to monitor your wifi for hackers or you're a tech savvy delinquent teen (like me) trying to check which family members are at home while you smell like cigarettes, this bot has you covered.
 
 ## Features
 
