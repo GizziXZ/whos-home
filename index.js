@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client({ intents: ['GuildMessages', 'Guilds'], partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 const fs = require('fs');
 const path = require('path');
-const { TOKEN, CLIENTID, GUILDID } = require('./config.json');
+const { TOKEN, GUILDID } = require('./config.json');
 
 // LINK - https://open.spotify.com/track/2ymrOUyov4ffcnzkzdQx3c?si=a333ae9675014be7 good music
 
