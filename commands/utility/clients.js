@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const os = require('os');
 const find = require('local-devices');
+const { toVendor } = require('@network-utils/vendor-lookup'); // finally a good npm package for this
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -16,7 +17,7 @@ module.exports = {
                 .setTimestamp()
                 .setFooter({text: 'Wifi clients', iconURL: 'https://i.imgur.com/wSTFkRM.png'});
             devices.forEach(device => {
-                embed.addFields({name: `${device.ip} (${device.name})`, value: device.mac});
+                embed.addFields({name: `${device.ip} (${device.name})`, value: `${device.mac} (${toVendor(device.mac)})`});
             });
             interaction.reply({ embeds: [embed] });
         })
