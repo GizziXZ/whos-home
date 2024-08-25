@@ -54,10 +54,6 @@ async function startMonitoring(client) {
     if (!channel) return console.log('No channel set!'); // No channel, no monitor :(
     let previousDevices = await find();
 
-    if (!fs.existsSync('./history.log')) {
-        fs.writeFileSync('./history.log', '');
-    }
-
     setInterval(async () => {
         const currentDevices = await find();
         const trusted = await localStorage.keys();
@@ -67,6 +63,10 @@ async function startMonitoring(client) {
         const disconnectedDevices = previousDevices.filter(prevDevice => 
             !currentDevices.some(device => device.mac === prevDevice.mac)
         );
+
+        if (!fs.existsSync('./history.log')) { // the existsSync is inside the interval so that we can clear the history.log file if it exists while the bot is running
+            fs.writeFileSync('./history.log', '');
+        }
 
         // notify new devices
         for (const device of newDevices) {
@@ -119,5 +119,5 @@ async function startMonitoring(client) {
             fs.appendFileSync('./history.log', `${new Date().toLocaleString()} - ${device.ip} disconnected (${device.mac} - ${toVendor(device.mac)})\n`);
         }
         previousDevices = currentDevices;
-    }, 3000); // Scan interval
+    }, 2000); // Scan interval
 }
