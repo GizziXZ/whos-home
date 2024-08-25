@@ -15,7 +15,7 @@ module.exports = {
         find().then(async devices => {
             const wifi = os.networkInterfaces().wlan0 || os.networkInterfaces().WiFi[1]; // im likely changing this variable eventually
             const embed = new EmbedBuilder()
-                .setTitle(wifi.address)
+                .setTitle('Current local ip:', wifi.address)
                 .setDescription('Here are the wifi clients connected to the network')
                 .setColor('#0099ff')
                 .setTimestamp()

@@ -9,9 +9,9 @@ module.exports = {
     async execute(interaction) {
         await localStorage.init();
         const trusted = await localStorage.keys();
-        if (trusted.length === 0) return await interaction.reply('No Mac addresses are trusted');
-        const trustedWithVendor = trusted.map(mac => `${mac} (${toVendor(mac)})`);
-        // await interaction.reply(`Trusted Mac addresses: \`${trusted.join(`\`, \``)}\``);
-        await interaction.reply(`Trusted Mac addresses: \`${trustedWithVendor.join(`\`, \``)}\``);
+        const filteredTrusted = trusted.filter(mac => !['notify-all', 'wifi-notif', 'channel'].includes(mac)); // filter out the keys that are not mac addresses
+        if (filteredTrusted.length === 0) return await interaction.reply('No Mac addresses are trusted');
+        const trustedWithVendor = filteredTrusted.map(mac => `${mac} (${toVendor(mac)})`);
+        await interaction.reply(`Trusted Mac addresses:\n* \`${trustedWithVendor.join('\`\n* \`')}\``);
     }
 }
