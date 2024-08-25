@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const localStorage = require('node-persist');
 const { toVendor } = require('@network-utils/vendor-lookup');
-const dns = require('dns');
 const fs = require('fs');
 
 module.exports = {
@@ -72,20 +71,12 @@ async function startMonitoring(client) {
         for (const device of newDevices) {
             if (!device) continue;
             const isTrusted = trusted.includes(device.mac);
-            let hostnames = dns.reverse(device.ip, (err, hostnames) => {
-                if (err) return console.error(err);
-                return hostnames;
-            });
             if (notifyAll || !isTrusted) {
                 // console.log(`New device connected: ${device.ip} (${device.mac} - ${toVendor(device.mac)})`);
                 const { EmbedBuilder } = require('discord.js');
                 const embed = new EmbedBuilder()
                     .setTitle('Device connected')
-                    // .setDescription(`${device.ip} (${device.mac})`)
-                    // .setColor('#0099ff') // changing this to red/green depending on whether trusted or not
-                    // .setFooter({ text: 'Wifi notifications', iconURL: 'https://i.imgur.com/wSTFkRM.png' })
                     .setTimestamp()
-                    .setAuthor({ name: `Hostname: ${hostnames.hostname}` || 'Unknown' })
                     .setDescription(`${device.ip} (${device.mac} - ${toVendor(device.mac)})`);
                 if (isTrusted) {
                     embed.setColor('Green');
