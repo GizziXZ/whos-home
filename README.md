@@ -30,7 +30,7 @@ This is a valuable bot to host especially if you've got a raspberry pi, whether 
     ```
 4. If you are going to host this on a device to be left open (preferably a raspberry pi), install pm2 to host it (if not just use `node index.js`)
     ```sh
-    npm i pm2
+    npm i -g pm2
     ```
 5. Use pm2 to start hosting
     ```sh
